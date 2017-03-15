@@ -3,12 +3,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //import Plugins from './plugins'
-import routes from './js/routes'
+import VueResource from 'vue-resource'
+import routes from './conf/routes'
 
+require('./scss/bootstrap.scss');
+require('./assets/font-awesome.min.css');
 
 
 Vue.use(VueRouter)
-
+Vue.use(VueResource)
 
 const router = new VueRouter({routes})
 
