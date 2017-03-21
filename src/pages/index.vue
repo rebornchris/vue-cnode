@@ -2,7 +2,7 @@
   <div class="page">
   <Door :state='doorState' @ready = 'doorIsReady'></Door>
    <NavBar @ready = 'ready' :isLoading = 'isLoading'>
-   	<li class="globalnav__link" :class = "{'is-active': currenTpye === n.tag}" v-for= 'n in navs'>
+   	<li class="globalnav__link" :class = "{'is-active': currenType === n.tag}" v-for= 'n in navs'>
    		<a href="#" @click.prevent = 'selectNav(n.tag)'>{{ n.name }}</a>
    	</li>
    </NavBar>
@@ -10,9 +10,7 @@
     	<div class="container">
     		 <div class="home-content" v-if="articles && articles.length > 0">
           <ArticleList  :articles="articles"></ArticleList>
-					<div class="loadmore-wrap" v-show='showLoadMoreModal'>
-						<LoadMore :state = 'loadMoreType' @loadMore = 'loadMore'></LoadMore>
-					</div>
+				
           </div>
 					<p class='page_feedback' v-else>
 						暂无任何文章
@@ -29,7 +27,7 @@ import Tools from '../conf/tools';
 import NavBar from '../components/NavBar.vue';
 import ArticleList from '../components/ArticleBrief';
 import Door from '../components/FrontDoor';
-import LoadMore from '../components/LoadingMore';
+// import LoadMore from '../components/LoadingMore';
 export default {
   data() {
   	const navs = [
@@ -45,11 +43,12 @@ export default {
   		navs,
   		doorState: 'init',
   		isLoading: false,
-  		showLoadMoreModal:false,
+  		// showLoadMoreModal:false,
   		loadMoreType: 0,
   		isLoadingMore:false,
   		page:1,
-  		currenTpye:'',
+			limit:0,
+  		currenType:'',
   		articles: null,
   		host:null
   	}
@@ -58,8 +57,8 @@ export default {
   components: {
     NavBar,
     ArticleList,
-    Door,
-		LoadMore
+    Door
+		// LoadMore
   },
 
   mounted(){},
@@ -78,9 +77,10 @@ export default {
 
   	getArticleType(type,callback){
   		this.fetchData(type).then((cb) => {
+				console.log(this===window)
                  // console.log(cb.data)
   			this.articles = cb.data.data;
-  			this.currenTpye = cb.type;
+  			this.currenType = cb.type;
   			this.page = cb.page;
   			typeof callback === 'function' && (callback());
   		},(reject) =>{
@@ -144,22 +144,23 @@ export default {
 				this.isLoadingMore = true;
 				this.loadMoreType = 0;
 
-				setTimeOut(()=>{
+				setTimeout(()=>{
 					let currenPage = this.page;
-
-					this.fetchData(this.currenType,(currenPage += 1))
+					let loadingLimit = this.limit;
+					this.fetchData(this.currenType,(currenPage += 1),loadingLimit=20)
 						.then((cb)=>{
 							const data = cb.data;
 							if(data.success){
 								const arr = data.data;
 								if((arr instanceof Array) && arr.length >0){
-									!this.articles && (this.articles = []);
+									// !this.articles && (this.articles = []);
 
 									this.articles  = this.articles.concat(arr);
-									this.showLoadMoreModal = false;
+								//	this.showLoadMoreModal = false;
 								}else{
 									this.loadMoreType = 2;
 									window.removeEventListener('scroll', this.scrollEV);
+									console.log(123123)
 								}
 								this.page =  currenPage;
 							}else{
