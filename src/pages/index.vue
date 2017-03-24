@@ -77,6 +77,8 @@ export default {
 
   	getArticleType(type,callback){
   		this.fetchData(type).then((cb) => {
+				console.log(this===window)
+                 // console.log(cb.data)
   			this.articles = cb.data.data;
   			this.currenType = cb.type;
   			this.page = cb.page;
