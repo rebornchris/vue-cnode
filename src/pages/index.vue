@@ -91,7 +91,6 @@ export default {
   	fetchData(type, page = 1 ,limit = 20){
   		const params  = `?tab=${(type === 'all' ? '' : type)}&page=${page}&limit=${limit}`;
   		const self = this;
-
   		return new Promise((resolve,reject) =>{
   			self.$http
   				.get(API.topics + params)
@@ -128,14 +127,13 @@ export default {
               return;
             }
 
-						this.loadMore();
-            // this.showLoadMoreModal = true;
+            this.showLoadMoreModal = true;
 
-            // if (this.page % 3 === 0) { // load more
-            //   this.loadMoreType = 1;
-            // } else {
-            //   this.loadMore();
-            // }
+            if (this.page % 3 === 0) { // load more
+              this.loadMoreType = 1;
+            } else {
+              this.loadMore();
+            }
           }
         };
 
@@ -160,9 +158,9 @@ export default {
 									this.articles  = this.articles.concat(arr);
 								//	this.showLoadMoreModal = false;
 								}else{
-									console.log("没有更多了")
 									this.loadMoreType = 2;
 									window.removeEventListener('scroll', this.scrollEV);
+									console.log(123123)
 								}
 								this.page =  currenPage;
 							}else{

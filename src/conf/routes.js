@@ -8,12 +8,12 @@ const routes = [{
     component: Index
   },
   {
-    path: '/user/:id',
+    path: '/user',
     name: 'user',
     component: User
   },
   {
-    path: '/topic/:id',
+    path: '/topic',
     name: 'topic',
     component: Topic
   }
