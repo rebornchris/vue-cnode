@@ -127,13 +127,14 @@ export default {
               return;
             }
 
-            this.showLoadMoreModal = true;
+       //     this.showLoadMoreModal = true;
 
-            if (this.page % 3 === 0) { // load more
-              this.loadMoreType = 1;
-            } else {
-              this.loadMore();
-            }
+						this.loadMore();
+            // if (this.page % 3 === 0) { // load more
+            //   this.loadMoreType = 1;
+            // } else {
+            //   this.loadMore();
+            // }
           }
         };
 
