@@ -64,6 +64,7 @@ export default {
   mounted(){},
   methods:{
   	doorIsReady(){
+
   		this.doorState = 'start';
   		this.getArticleType(this.navs[0].tag,()=>{
   			this.doorState = 'end';
@@ -77,8 +78,6 @@ export default {
 
   	getArticleType(type,callback){
   		this.fetchData(type).then((cb) => {
-				console.log(this===window)
-                 // console.log(cb.data)
   			this.articles = cb.data.data;
   			this.currenType = cb.type;
   			this.page = cb.page;

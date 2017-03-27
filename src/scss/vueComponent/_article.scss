@@ -1,6 +1,9 @@
 .article-container {
   padding: .75rem 1rem;
   margin-bottom: 1rem;
+  // border: 1px #808080 solid;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),
+              0 2px 20px 0 rgba(0,0,0,.12);
 }
 
 .article {
@@ -16,7 +19,9 @@
   &__meta {
     color: #808080;
     > span {
-      display: inline-block;
+      float: right;
+      margin-top: -20px;
+      // display: inline-block;
       margin-right: .75rem;
     }
   }
@@ -41,6 +46,11 @@
       margin-right: .6rem;
     }
   }
+
+  &__content {
+    padding-top: 20px;
+  }
+
 
   &__btn-wrap {
     float: right;

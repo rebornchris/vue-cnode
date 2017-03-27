@@ -22,13 +22,11 @@
       width: {
         type: Number,
         default: 60,
-        validator: val => val >= 10
       },
 
       height: {
         type: Number,
         default: 60,
-        validator: val => val >= 10
       },
 
       state: {
