@@ -10,8 +10,8 @@
 
 // // component
 @import "component/avatar";
-// @import "component/buttons";
-// @import "component/button-group";
+@import "component/buttons";
+@import "component/button-group";
 // @import "component/close";
 // @import "component/form";
 // @import "component/menu";
@@ -26,7 +26,7 @@
 // @import "vueComponent/actionBtn";
 @import "vueComponent/articleBrief";
 @import "vueComponent/article";
-// @import "vueComponent/comments";
+@import "vueComponent/comments";
 @import "vueComponent/navBar";
 // @import "vueComponent/postModal";
 // @import "vueComponent/loadingBar";

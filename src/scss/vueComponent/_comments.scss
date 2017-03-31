@@ -1,5 +1,5 @@
 .cell-move {
-  transition: transform .8s;
+  transition: transform .6s;
 }
 
 .comments {
@@ -46,6 +46,8 @@
   &__item {
     position: relative;
     margin-top: 1rem;
+    padding-top: .6rem;
+    border-bottom: 1px #f0f0f0 solid;
     &:hover {
       .comments__ope-btn {
         visibility: visible;
@@ -74,6 +76,7 @@
   }
 
   &__meta {
+    margin-bottom: 2rem;
     font-size: .7rem;
     color: #808080;
   }
@@ -83,7 +86,6 @@
     margin-left: 12px;
     visibility: hidden;
     &:hover {
-      color: #000;
       text-decoration: none;
     }
 
