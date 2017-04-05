@@ -20,7 +20,7 @@ methods:{
     ready(){
         this.doorState = 'start'
         console.log(this.doorState)
-        setTimeout(()=>{this.$router.push('/index')},2000)
+        setTimeout(()=>{this.$router.push('/index')},3000)
     }
 }
 }
