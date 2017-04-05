@@ -1,7 +1,7 @@
 <template>
     <transition-group tag="ul" name="brief-list" appear>
-        <li class="article-brief" v-for="a in articles" :key="a.id">
-            <router-link :to="{ path: '/user/' + a.author.loginname }" class="article-brief__avatar">
+        <li class="article-brief " :class="{'article-brief__top':name==='index'}" v-for="a in articles" :key="a.id">
+            <router-link :to="{ path: '/user/'+ a.author.loginname}" class="article-brief__avatar">
                 <img :src="a.author.avatar_url" class="avatar avatar--m">
             </router-link>
             <div class="article-brief__group">
@@ -33,6 +33,11 @@ import {ArticleMap} from '../conf/config';
 import Tools from '../conf/tools';
 
 export default {
+    data(){
+        return{
+            name:this.$route.name
+        }
+    },
     props: {
         articles: {
             type: Array

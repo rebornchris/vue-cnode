@@ -14,13 +14,16 @@
 
 .article-brief {
   position: relative;
-  top:5rem;
   min-height: 5rem;
   padding: 1rem 0;
   border: 1px solid #e7eaf1;
   margin-bottom: 2rem;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),
               0 2px 10px 0 rgba(0,0,0,.12);
+
+  &__top{
+    top:5rem;
+  }
   &__avatar {
     position: absolute;
     top: 0;

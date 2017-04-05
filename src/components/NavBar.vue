@@ -1,7 +1,7 @@
 <template>
   <header class="globalnav globalnav--fixed">
     <div class="container">
-      <router-link to="/" class="globalnav__brand t-pull-left">CNode</router-link>
+      <router-link to="/index" class="globalnav__brand t-pull-left">CNode</router-link>
       <div class="globalnav__spinner">
         <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
           <path fill="#00a9e8" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50" transform="rotate(222 50 50)">
@@ -28,13 +28,13 @@
               <div class="menu menu--arrowed moremenu" >
     <!--             <ul>
                   <li>
-                    <a href="https://cnodejs.org/" target="_blank">Õæ¡¤¹ÙÍø</a>
+                    <a href="https://cnodejs.org/" target="_blank">ï¿½æ¡¤ï¿½ï¿½ï¿½ï¿½</a>
                   </li>
                   <li>
-                    <a href="https://github.com/jiananle/vue-cnode" target="_blank">ÏîÄ¿µØÖ·</a>
+                    <a href="https://github.com/jiananle/vue-cnode" target="_blank">ï¿½ï¿½Ä¿ï¿½ï¿½Ö·</a>
                   </li>
                   <li>
-                    <a href="https://jiananle.github.io/vue-cnode" target="_blank">Ô¤ÀÀ</a>
+                    <a href="https://jiananle.github.io/vue-cnode" target="_blank">Ô¤ï¿½ï¿½</a>
                   </li>
                 </ul> -->
               </div>

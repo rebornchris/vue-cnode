@@ -11,12 +11,13 @@
 </template>
 
 <script>
- let Snap;
-  try {
-    Snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'); // eslint-disable-line global-require
-  } catch (e) {
-    Snap = require('snapsvg'); // eslint-disable-line global-require
-  }
+import Snap from "snapsvg"
+//  let Snap;
+//   try {
+//     Snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'); // eslint-disable-line global-require
+//   } catch (e) {
+//     Snap = require('snapsvg'); // eslint-disable-line global-require
+//   }
   export default {
     data() {
       const path = 'M 40 -21.875 C 11.356078 -21.875 -11.875 1.3560784 -11.875 30 C -11.875 58.643922 11.356078 81.875 40 81.875 C 68.643922 81.875 91.875 58.643922 91.875 30 C 91.875 1.3560784 68.643922 -21.875 40 -21.875 Z';

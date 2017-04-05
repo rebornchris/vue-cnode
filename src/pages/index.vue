@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="page">
-  <Door :state='doorState' @ready = 'doorIsReady'></Door>
    <NavBar @ready = 'ready' :isLoading = 'isLoading'>
    	<li class="globalnav__link" :class = "{'is-active': currenType === n.tag}" v-for= 'n in navs'>
    		<a href="#" @click.prevent = 'selectNav(n.tag)'>{{ n.name }}</a>
@@ -9,7 +8,7 @@
     <div class="page_main">
     	<div class="container">
     		 <div class="home-content" v-if="articles && articles.length > 0">
-          <ArticleList  :articles="articles"></ArticleList>
+          <ArticleList :articles="articles"></ArticleList>
 				
           </div>
 					<p class='page_feedback' v-else>
@@ -61,16 +60,14 @@ export default {
 		// LoadMore
   },
 
-  mounted(){},
-  methods:{
-  	doorIsReady(){
+  mounted(){
 
-  		this.doorState = 'start';
   		this.getArticleType(this.navs[0].tag,()=>{
-  			this.doorState = 'end';
-  			this.addScrollEvt();
-  		})
-  	},
+  		this.addScrollEvt();
+	})
+	},
+
+  methods:{
 
   	ready(data){
   		this.host = data;
@@ -102,7 +99,8 @@ export default {
   	},
 
   	selectNav(tag){
-  		this.isLoading = true ; this.getArticleType(tag,() =>{
+  		this.isLoading = true ; 
+			this.getArticleType(tag,() =>{
   			this.isLoading = false;
   		})
   	},

@@ -67,7 +67,7 @@
 
         const timer = window.setInterval(() => {
           progress = Math.min(progress + (Math.random() * 0.1), 1);
-          //  console.log(progress)
+           console.log(progress)
           this.draw(progress);
 
           if ((1 - progress) <= 0.3) {

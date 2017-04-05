@@ -182,10 +182,14 @@ const timeFormat = (time)=>{
 	const date = new Date(time);
 	const year = date.getFullYear();
 	const month = date.getMonth();
-	const day = date.getDate();
+	const day = date.getDate(); 
+  const hours = date.getHours();
+  const mins = date.getMinutes();
 	const formatM = (month + 1 < 10 ? `0${month+1}`:month+1);
 	const formatD = (day + 1 <10 ? `0${day}`: day);
-	return `${year} - ${formatM} - ${formatD}`;
+  const formatH = (hours + 1 <= 10? `0${hours}`:hours);
+  const formatMin = (mins + 1 <= 10? `0${mins}`:mins);
+	return `${year}-${formatM}-${formatD} ${formatH} : ${formatMin}`;
 }
 
 const timeFormatCN = (time) =>{

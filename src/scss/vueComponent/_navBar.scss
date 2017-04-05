@@ -5,8 +5,8 @@ $text-color: #959fb0;
   width: 100%;
   padding: 8px 0; // height = 60px
   line-height: 1.5;
-  color: #fff;
-  background: linear-gradient(135deg,#000 0,#3f729b 100%);
+  color: #1e88e5;
+  background: rgba(0, 0, 0, 0) linear-gradient(45deg, #135fac 1%, #1e88e5 64%, #1e87e3 97%) repeat scroll -1px center / 102% 102%;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),
               0 2px 10px 0 rgba(0,0,0,.12);
 
@@ -38,6 +38,7 @@ $text-color: #959fb0;
   }
 
   &__brand {
+    font-family: calligraffittiregular;
     display: block;
     padding: 7px 15px;
     font-size: 1rem;

@@ -5,9 +5,9 @@
     </div>
     <div class="comments__sort">
       <div class="button-group">
-        <button class="btn" :class="{'is-active': sortBy === 'normal'}" @click="sort('normal', $event)">默认</button>
-        <button class="btn" :class="{'is-active': sortBy === 'latest'}" @click="sort('latest', $event)">最新</button>
-        <button class="btn" :class="{'is-active': sortBy === 'ups'}" @click="sort('ups', $event)">赞数</button>
+        <button class="btn" :class="{'is-active' :sortBy === 'normal'}" @click="sort('normal', $event)">默认</button>
+        <button class="btn" :class="{'is-active' :sortBy === 'latest'}" @click="sort('latest', $event)">最新</button>
+        <button class="btn" :class="{'is-active' :sortBy === 'ups'}" @click="sort('ups', $event)">赞数</button>
       </div>
     </div>
     <div v-if="comments.length > 0">
@@ -25,8 +25,8 @@
           <div class="comments__cont" v-html='c.content'></div>
 
           <div class="comments__meta">
-            <span class="t-pull-right" v-show="c.ups && c.ups.length > 0">{{ c.ups.length }} 赞</span>
-
+           <span class="comments__created_at" >{{formatCreateTime(c.create_at)}}</span>
+            <span style="float:right" v-show="c.ups && c.ups.length > 0">{{ c.ups.length }} 赞</span>
           </div>
         </div>
          </div>
@@ -41,19 +41,20 @@
   export default {
     data() {
       return {
-
+        sortBy:''
       }
     },
     props: {
       comments: {
         type: Array,
         default: []
-      }
+      },
+
     },
 
     methods: {
         formatCreateTime(time){
-            return Tool.timeFormatCN(time)
+            return Tool.timeFormat(time)
         },
 
         handleUp(reply) {
@@ -75,7 +76,6 @@
         sort(type, $evt){
             if(this.comments && this.comments.length>0){
                 const $target = $evt.target;
-
                 if($target.classList.contains('is-active')) return;
 
                 this.comments.sort((a,b)=>{
