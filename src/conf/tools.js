@@ -2,7 +2,7 @@ import {API} from './config';
 
 const ajax = function(type, url, params) {
 	return new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequst();
+		const xhr = new XMLHttpRequest();
 
 		xhr.onload = () => {
 			if (xhr.status >= 200 && xhr.status < 400) {
@@ -54,6 +54,7 @@ const handleAjaxError = function(reject, vm, callback){
 };
 
 const CookieUtil = {
+  
 	get:(name) =>{
 		const cookie = document.cookie;
 		const cookieName = `${encodeURIComponent(name)}=`;
@@ -96,7 +97,8 @@ const CookieUtil = {
   // 没有直接删除的方法
   // 直接覆盖同名过期的cookie
   unset: (name, path, domain, secure) => {
-    this.set(name, '', path, domain, secure);
+    console.log(123+path)
+    CookieUtil.set(name, '', path, domain, secure);
   }
 };
 
@@ -128,6 +130,8 @@ const getHost = function isLogin(accessToken) {
     const xhr = ajax('post', `${API.interface}accesstoken`, {
       accesstoken: token
     });
+
+    // console.log(xhr)
 
     xhr.then((data) => {
       if (data.success) {

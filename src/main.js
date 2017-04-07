@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import Plugins from './plugins'
+import Plugins from './plugins'
 import VueResource from 'vue-resource'
 import routes from './conf/routes'
 
@@ -12,6 +12,7 @@ require('./assets/font-awesome.min.css');
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(Plugins);
 
 const router = new VueRouter({routes})
 
