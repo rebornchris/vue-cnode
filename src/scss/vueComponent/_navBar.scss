@@ -16,12 +16,19 @@ $text-color: #959fb0;
 
   &__spinner {
     position: absolute;
-    top: -8px;
-    left: 50%;
+    top: 5px;
+    left: 56%;
     display: none;
     width: 3rem;
     height: 3rem;
     transform: translate3d(-50%, 0, 0);
+  
+  img{
+    width:40px;
+    height:40px;
+    // margin-top:15px
+  }
+  
   }
 
   &.is-loading {

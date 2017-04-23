@@ -1,6 +1,7 @@
 <!-- 个人中心 -->
 <template>
   <div class="page">
+      <ActionBtn :host="host"></ActionBtn>
     <GlobalNav @ready="ready" :isLoading="isNavLoading">
       <li class="globalnav__link" :class="{'is-active': currType === n.tag}" v-for="n in navs">
         <a href="#" @click.prevent="getArticleType(n.tag)">{{ n.name }}</a>
@@ -21,7 +22,7 @@
                   <i class="fa fa-calendar" aria-hidden="true"></i>
                   {{ formatCreateTime(userData.create_at) }}
                 </span>
-              </div>
+              </div>  
             </div>
             <h2 class="profile__name">
               {{ userData.loginname }}
@@ -47,7 +48,7 @@
   import Tools from '../conf/tools';
   // import PageLoading from '../components/PageLoading';
   import GlobalNav from '../components/NavBar';
-  // import ActionBtn from '../components/ActionButton';
+  import ActionBtn from '../components/ArticleButton';
   import ArticleList from '../components/ArticleBrief';
 
   export default {
@@ -71,7 +72,7 @@
     components: {
       GlobalNav,
       ArticleList,
-      // PageLoading
+      ActionBtn
     },
 
     watch: {

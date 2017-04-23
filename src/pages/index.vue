@@ -1,15 +1,16 @@
 <template lang="html">
-  <div class="page">
+  <div class="page" >
    <NavBar @ready = 'ready' :isLoading = 'isLoading'>
+	  <ActionBtn :host="host"></ActionBtn>
    	<li class="globalnav__link" :class = "{'is-active': currenType === n.tag}" v-for= 'n in navs'>
    		<a href="#" @click.prevent = 'selectNav(n.tag)'>{{ n.name }}</a>
    	</li>
    </NavBar>
     <div class="page_main">
     	<div class="container">
+			<Mini :dd='MiniList'></Mini>
     		 <div class="home-content" v-if="articles && articles.length > 0">
           <ArticleList :articles="articles"></ArticleList>
-				
           </div>
 					<p class='page_feedback' v-else>
 						暂无任何文章
@@ -25,7 +26,8 @@ import { API } from '../conf/config';
 import Tools from '../conf/tools';
 import NavBar from '../components/NavBar.vue';
 import ArticleList from '../components/ArticleBrief';
-import Door from '../components/FrontDoor';
+import Mini from '../components/MiniView';
+import ActionBtn from '../components/ArticleButton'
 // import LoadMore from '../components/LoadingMore';
 export default {
   data() {
@@ -48,17 +50,29 @@ export default {
   		page:1,
 			limit:0,
   		currenType:'',
-  		articles: null,
-  		host:null
+  		articles: [],
+  		host:null,
+			MiniList:[]
   	}
   },
 
   components: {
     NavBar,
     ArticleList,
-    Door
+		Mini,
+		ActionBtn
 		// LoadMore
   },
+
+
+	watch:{
+		articles:function(temp){
+			 this.MiniList = temp.filter(x=>{
+				return x.reply_count<1
+			})
+			this.MiniList = this.MiniList.splice(-5)
+			}
+		},
 
   mounted(){
 
@@ -73,9 +87,12 @@ export default {
   		this.host = data;
   	},
 
+
   	getArticleType(type,callback){
   		this.fetchData(type).then((cb) => {
   			this.articles = cb.data.data;
+
+				// console.log(cb.data.data)
   			this.currenType = cb.type;
   			this.page = cb.page;
   			typeof callback === 'function' && (callback());
@@ -87,10 +104,12 @@ export default {
   	fetchData(type, page = 1 ,limit = 20){
   		const params  = `?tab=${(type === 'all' ? '' : type)}&page=${page}&limit=${limit}`;
   		const self = this;
+			this.isLoading = true;
   		return new Promise((resolve,reject) =>{
   			self.$http
   				.get(API.topics + params)
   				.then((response) =>{
+						this.isLoading = false;
   					resolve({data: response.data,type,page})
   				},(error)=>{
   					reject(error)
@@ -99,7 +118,7 @@ export default {
   	},
 
   	selectNav(tag){
-  		this.isLoading = true ; 
+  		this.isLoading = true ;
 			this.getArticleType(tag,() =>{
   			this.isLoading = false;
   		})
@@ -124,14 +143,7 @@ export default {
               return;
             }
 
-       //     this.showLoadMoreModal = true;
-
 						this.loadMore();
-            // if (this.page % 3 === 0) { // load more
-            //   this.loadMoreType = 1;
-            // } else {
-            //   this.loadMore();
-            // }
           }
         };
 

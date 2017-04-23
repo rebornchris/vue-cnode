@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <GlobalNav @ready="ready"></GlobalNav>
+    <ActionBtn :host="host"></ActionBtn>
     <div class="page__main">
       <div class="container">
         <div v-if="article">
@@ -24,6 +25,7 @@
   import GlobalNav from '../components/NavBar';
   import Article from '../components/Article';
   import Comments from '../components/Comments';
+  import ActionBtn from '../components/ArticleButton';
   export default {
     data() {
       return {
@@ -54,6 +56,7 @@
       GlobalNav,
       'VC-Article': Article,
       Comments:Comments,
+      ActionBtn
       // PageLoading
       
     },

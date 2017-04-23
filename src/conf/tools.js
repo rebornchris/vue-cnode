@@ -45,7 +45,7 @@ const handleAjaxError = function(reject, vm, callback){
 	if (!vm || !reject) return;
 
 	const data = reject.data;
-            
+
 	vm.$message.error(data.success === false ? data.error_msg : '服务器异常');
 
   if (typeof callback === 'function') {
@@ -54,7 +54,7 @@ const handleAjaxError = function(reject, vm, callback){
 };
 
 const CookieUtil = {
-  
+
 	get:(name) =>{
 		const cookie = document.cookie;
 		const cookieName = `${encodeURIComponent(name)}=`;
@@ -186,7 +186,7 @@ const timeFormat = (time)=>{
 	const date = new Date(time);
 	const year = date.getFullYear();
 	const month = date.getMonth();
-	const day = date.getDate(); 
+	const day = date.getDate();
   const hours = date.getHours();
   const mins = date.getMinutes();
 	const formatM = (month + 1 < 10 ? `0${month+1}`:month+1);

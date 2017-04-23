@@ -18,6 +18,7 @@
     data() {
       return {
         $input: null,
+        clicked:false,
         msg: ''
       };
     },
@@ -41,15 +42,13 @@
     methods: {
       signIn() {
         !this.$input && (this.$input = document.getElementById('accesstoken'));
-
         const token = this.$input.value;
-
         if (!token) {
           this.msg = 'accesstoken 不能为空';
           return;
         }
-
-        this.$emit('signIn', token);
+        this.clicked = true;
+        this.$emit('signIn', token,this.clicked);
       }
     }
   };
@@ -75,6 +74,7 @@
       color: #d9534f;
       &.is-error {
         visibility: visible;
+        text-align:center;
       }
     }
   }
