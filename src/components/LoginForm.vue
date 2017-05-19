@@ -4,6 +4,7 @@
       <form role="form">
         <div class="form-group loginFormMenu__cont">
           <label for="accesstoken" class="sr-only">accessToke</label>
+          <input type="text" class="form-control" id="user" placeholder="user">
           <input type="text" class="form-control" id="accesstoken" placeholder="accesstoken">
         </div>
         <span class="loginFormMenu__msg" :class="{ 'is-error': msg }">{{ msg }}</span>
@@ -18,6 +19,7 @@
     data() {
       return {
         $input: null,
+        $user: null,
         clicked:false,
         msg: ''
       };
@@ -41,14 +43,17 @@
 
     methods: {
       signIn() {
-        !this.$input && (this.$input = document.getElementById('accesstoken'));
+        !this.$input && (this.$input = document.getElementById('accesstoken')) && !this.user && (this.user = document.getElementById('user'));
+        const user = this.user.value;
         const token = this.$input.value;
-        if (!token) {
-          this.msg = 'accesstoken 不能为空';
+        let flag = this.clicked;
+        if (!token||!user) {
+          this.msg = '不能为空';
           return;
         }
-        this.clicked = true;
-        this.$emit('signIn', token,this.clicked);
+        flag = true;
+        console.log(this.clicked)
+        this.$emit('signIn',user,token,flag);
       }
     }
   };

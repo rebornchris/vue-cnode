@@ -5,7 +5,7 @@
         <img  style="border-radius:50%" src="../assets/logo2.jpg" alt="logo">
       </div>
       <div class="door__loader">
-        <CircleLoading :state="circleState" @loaded="loaded"></CircleLoading>
+        <CircleLoading :circleStatus="circleState" @loaded="loaded"></CircleLoading>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
     data() {
       return {
         animated: false,
-        circleState: 'init',
+        circleState: '',
         animEventName: ''
       };
     },

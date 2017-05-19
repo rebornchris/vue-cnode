@@ -25,8 +25,15 @@
           <div class="comments__cont" v-html='c.content'></div>
 
           <div class="comments__meta">
-           <span class="comments__created_at" >{{formatCreateTime(c.create_at)}}</span>
+           <span>{{formatCreateTime(c.create_at)}}</span>
             <span style="float:right" v-show="c.ups && c.ups.length > 0">{{ c.ups.length }} 赞</span>
+            <a href="#" class="comments__ope-btn" @click.prevent="handleUps(c)" v-if="hasHost">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 赞
+              </a>
+
+              <a href="#" class="comments__ope-btn" @click.prevent="handleReply(c.author.loginname)" v-if="hasHost">
+                <i class="fa fa-reply" aria-hidden="true"></i> 回复
+              </a>
           </div>
         </div>
          </div>
@@ -49,7 +56,10 @@
         type: Array,
         default: []
       },
-
+      hasHost: {
+        type: Boolean,
+        default: false
+      }
     },
 
     methods: {
@@ -57,13 +67,15 @@
             return Tool.timeFormat(time)
         },
 
-        handleUp(reply) {
-            reply.ups = reple.ups || [];
+        handleUps(reply) {
+            reply.ups = reply.ups || [];
 
             this.$emit('ups', reply.id, (data)=>{
                 if(data.action ==='up'){
+                    this.$message.success('成功点赞')
                     reply.ups.push(null);
                 }else if(data.action === 'down'){
+                    this.$message.success('成功取消点赞')
                     reply.ups.shift();
                 }
             })

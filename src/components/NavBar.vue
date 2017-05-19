@@ -1,7 +1,7 @@
 <template>
   <header class="globalnav globalnav--fixed" :class="{'is-loading':isLoading}">
     <div class="container">
-      <router-link to="/index" class="globalnav__brand t-pull-left">CNode</router-link>
+      <router-link to="/index" class="globalnav__brand t-pull-left">知乎日报</router-link>
       <div class="globalnav__spinner">
        <img src="../assets/default.svg">
       </div>
@@ -9,7 +9,7 @@
         <li class="globalnav__link" v-if="!host">
           <a href="#" @click.stop.prevent="toggleMenu(1)">登录</a>
           <div class="globalnav__menu globalnav__loginFormMenu">
-            <loginForm @signIn="getHost" :clicked='clicked' :show="showLoginForm"></loginForm>
+            <loginForm @signIn="getHost"  :show="showLoginForm"></loginForm>
           </div>
         </li>
 
@@ -64,14 +64,14 @@
   import Tools from '../conf/tools';
   import loginForm from './LoginForm';
   import Notification from './Notification'
+  import {user_pass,login_token} from '../conf/config'
 export default {
 data(){
   return{
     host:null,
     showLoginForm:false,
     showMoreMenu:false,
-    showNotification:false,
-    clicked:false
+    showNotification:false
   };
 },
 
@@ -128,11 +128,21 @@ mounted(){
       }, false);
     },
     methods:{
-      getHost(token,clicked){
-        const auth = Tools.getHost(token);
+      getHost(user,token,flag){
+        console.log(typeof(flag))
+        if (user!=user_pass.user || token!=user_pass.password){
+          if (typeof(flag)!=="undefined") {
+            this.$message.error("密码错误");
+            return;
+          }
+        }
+        if (Tools.CookieUtil.get('token')===""&&typeof(flag)==="undefined") {
+          return;
+        }
+        const auth = Tools.getHost(login_token);
         auth.then((data)=>{
           this.host = data;
-          if(clicked){
+          if(flag){
             this.$message.success('成功登录')
           }
           this.showLoginForm = false;
@@ -141,7 +151,8 @@ mounted(){
           },1000);
         },(errorMsg)=>{
           this.host = null;
-          this.$message.error(errorMsg);
+          this.$message.error("服务器错误");
+          console.log(errorMsg)
         });
       },
       toggleMenu(type){
@@ -169,6 +180,7 @@ mounted(){
         if(this.host!==null){
         this.host = null;
         this.$message.success("成功退出");
+        window.location.reload();
         Tools.CookieUtil.set('token', '','');
         }else{
           this.$message.error('尚未登录')

@@ -193,7 +193,7 @@ const timeFormat = (time)=>{
 	const formatD = (day + 1 <10 ? `0${day}`: day);
   const formatH = (hours + 1 <= 10? `0${hours}`:hours);
   const formatMin = (mins + 1 <= 10? `0${mins}`:mins);
-	return `${year}-${formatM}-${formatD} ${formatH} : ${formatMin}`;
+	return `${year}-${formatM}-${formatD}  ${formatH}:${formatMin}`;
 }
 
 const timeFormatCN = (time) =>{

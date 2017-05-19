@@ -1,6 +1,6 @@
 <template>
   <div class="svg-wrap">
-    <svg class="svg" :width="width + 'px'" :height="height + 'px'" viewBox="0 0 80 80">
+    <svg class="svg" width="60px" height="60px" viewBox="0 0 80 80">
       <path class="svg-bg"
             d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z"></path>
       <path class="svg-circle"
@@ -19,17 +19,7 @@
       };
     },
     props: {
-      width: {
-        type: Number,
-        default: 60,
-      },
-
-      height: {
-        type: Number,
-        default: 60,
-      },
-
-      state: {
+      circleStatus: {
         default: 'start' // start | end
       }
     },
@@ -39,7 +29,7 @@
       this.init();
     },
     watch: {
-      state(newVal) {
+      circleStatus(newVal) {
         switch (newVal) {
           case 'start':
             this.startLoading();
@@ -73,9 +63,9 @@
           if ((1 - progress) <= 0.3) {
             window.clearInterval(timer);
             this.preLoading = true;
-            this.state = 'end'
+            this.circleStatus = 'end'
 
-            if (this.state === 'end') {
+            if (this.circleStatus === 'end') {
               this.endLoading();
             }
           }

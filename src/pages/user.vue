@@ -22,7 +22,7 @@
                   <i class="fa fa-calendar" aria-hidden="true"></i>
                   {{ formatCreateTime(userData.create_at) }}
                 </span>
-              </div>  
+              </div>
             </div>
             <h2 class="profile__name">
               {{ userData.loginname }}
