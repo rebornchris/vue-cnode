@@ -69,6 +69,7 @@ export default {
 data(){
   return{
     host:null,
+    flag1:false,
     showLoginForm:false,
     showMoreMenu:false,
     showNotification:false
@@ -128,12 +129,18 @@ mounted(){
       }, false);
     },
     methods:{
-      getHost(token){
-
+      getHost(token,flag){
+        this.flag1 = flag;
+        if (token==='') {
+          this.$message.error('不能为空');
+          return;
+        }
         const auth = Tools.getHost(token);
         auth.then((data)=>{
           this.host = data;
-          this.$message.success('成功登录')
+          if (typeof flag !== 'undefined') {
+            this.$message.success('成功登录')
+          }
           this.showLoginForm = false;
           setTimeout(()=>{
             this.$emit('ready',data);
@@ -169,7 +176,7 @@ mounted(){
         if(this.host!==null){
         this.host = null;
         this.$message.success("成功退出");
-        window.location.reload();
+      //  window.location.reload();
         Tools.CookieUtil.set('token', '','');
         }else{
           this.$message.error('尚未登录')

@@ -20,7 +20,6 @@ const user_pass = {
 	password:"admin"
 };
 
-const login_token = "0ff4f467-53a4-42be-a088-eb81f8864967";
 
 const API = {
 	interface: url,
