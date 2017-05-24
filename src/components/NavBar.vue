@@ -64,12 +64,10 @@
   import Tools from '../conf/tools';
   import loginForm from './LoginForm';
   import Notification from './Notification'
-  import {user_pass,login_token} from '../conf/config'
 export default {
 data(){
   return{
     host:null,
-    flag1:false,
     showLoginForm:false,
     showMoreMenu:false,
     showNotification:false
@@ -130,7 +128,6 @@ mounted(){
     },
     methods:{
       getHost(token,flag){
-        this.flag1 = flag;
         if (token==='') {
           this.$message.error('不能为空');
           return;
@@ -148,7 +145,6 @@ mounted(){
         },(errorMsg)=>{
           this.host = null;
           this.$message.error("服务器错误");
-          console.log(errorMsg)
         });
       },
       toggleMenu(type){

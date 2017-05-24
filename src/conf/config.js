@@ -15,10 +15,7 @@ const ArticleCategory = {
 
 const url = 'https://cnodejs.org/api/v1/';
 
-const user_pass = {
-	user:"admin",
-	password:"admin"
-};
+
 
 
 const API = {
@@ -36,4 +33,4 @@ const API = {
 	messageMarkAll: `${url}message/mark_all`
 };
 
-export {ArticleMap,ArticleCategory,API,user_pass,login_token};
+export {ArticleMap,ArticleCategory,API};
