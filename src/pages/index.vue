@@ -133,8 +133,7 @@ export default {
           if (this.isLoadingMore) return;
 
           const docH = Math.max(doc.clientHeight, doc.scrollHeight);
-          // fix firefox body.scrollTop always return 0
-          // see http://stackoverflow.com/questions/28633221/document-body-scrolltop-firefox-returns-0-only-js
+          
           const bodyScrollTop = window.pageYOffset || body.scrollTop || doc.scrollTop || 0;
 
           if ((bodyScrollTop + winH - docH) >= 0) {

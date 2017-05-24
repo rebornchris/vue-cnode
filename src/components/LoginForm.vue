@@ -19,8 +19,6 @@
     data() {
       return {
         $input: null,
-        $user: null,
-        clicked:false,
         msg: ''
       };
     },
@@ -43,17 +41,9 @@
 
     methods: {
       signIn() {
-        !this.$input && (this.$input = document.getElementById('accesstoken')) && !this.user && (this.user = document.getElementById('user'));
-        const user = this.user.value;
+        !this.$input && (this.$input = document.getElementById('accesstoken'));
         const token = this.$input.value;
-        let flag = this.clicked;
-        if (!token||!user) {
-          this.msg = '不能为空';
-          return;
-        }
-        flag = true;
-        console.log(this.clicked)
-        this.$emit('signIn',user,token,flag);
+        this.$emit('signIn',token);
       }
     }
   };

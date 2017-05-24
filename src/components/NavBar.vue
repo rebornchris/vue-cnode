@@ -128,23 +128,12 @@ mounted(){
       }, false);
     },
     methods:{
-      getHost(user,token,flag){
-        console.log(typeof(flag))
-        if (user!=user_pass.user || token!=user_pass.password){
-          if (typeof(flag)!=="undefined") {
-            this.$message.error("密码错误");
-            return;
-          }
-        }
-        if (Tools.CookieUtil.get('token')===""&&typeof(flag)==="undefined") {
-          return;
-        }
-        const auth = Tools.getHost(login_token);
+      getHost(token){
+
+        const auth = Tools.getHost(token);
         auth.then((data)=>{
           this.host = data;
-          if(flag){
-            this.$message.success('成功登录')
-          }
+          this.$message.success('成功登录')
           this.showLoginForm = false;
           setTimeout(()=>{
             this.$emit('ready',data);
