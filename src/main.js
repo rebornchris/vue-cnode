@@ -14,7 +14,10 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Plugins);
 
-const router = new VueRouter({routes})
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
 
 /* eslint-disable no-new */
 new Vue({
