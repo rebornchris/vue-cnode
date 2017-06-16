@@ -1,7 +1,7 @@
 <template>
   <header class="globalnav globalnav--fixed" :class="{'is-loading':isLoading}">
     <div class="container">
-      <router-link to="/index" class="globalnav__brand t-pull-left">知乎日报</router-link>
+      <router-link to="/index" class="globalnav__brand t-pull-left">Cnode</router-link>
       <div class="globalnav__spinner">
        <img src="../assets/default.svg">
       </div>

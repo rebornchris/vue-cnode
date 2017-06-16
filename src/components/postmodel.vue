@@ -40,7 +40,7 @@ import {ArticleCategory} from '../conf/config'
 import createSimplemde from '../conf/createSimplemde'
 export default {
   data() {
-    return {
+     return {
       mde: null,
       categories: ArticleCategory,
       selectedCategory: 'ask',

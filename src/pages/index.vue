@@ -133,7 +133,7 @@ export default {
           if (this.isLoadingMore) return;
 
           const docH = Math.max(doc.clientHeight, doc.scrollHeight);
-          
+
           const bodyScrollTop = window.pageYOffset || body.scrollTop || doc.scrollTop || 0;
 
           if ((bodyScrollTop + winH - docH) >= 0) {
