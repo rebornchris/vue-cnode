@@ -15,7 +15,6 @@ Vue.use(VueResource)
 Vue.use(Plugins);
 
 const router = new VueRouter({
-  mode: 'history',
   routes
 })
 
