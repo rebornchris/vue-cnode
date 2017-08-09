@@ -1,46 +1,44 @@
 <template>
-  <transition name='fade'>
-    <div class="modal postModal" v-show='show'>
-      <div class="modal-header">
-        <button type="button" class="close" @click.stop='close'>
+<transition name='fade'>
+  <div class="modal postModal" v-show='show'>
+    <div class="modal-header">
+      <button type="button" class="close" @click.stop='close'>
           <span aria-hidden='true'>x</span>
         </button>
-        <h4 class="modal-title">发布文章</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <span class="post__label">类型：</span>
-          <div class="post__types">
-            <span v-for="(val,key) in categories"
-                  :data-type = 'key'
-                  :class="selectedCategory === key?'active':''"
-                  @click='selectType($event)'>{{val}}</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="标题" v-model='title'>
-        </div>
-        <div class="form-group">
-          <label for="post" aria-hidden='true'></label>
-          <textarea name="post" id="post"></textarea>
+      <h4 class="modal-title">发布文章</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <span class="post__label">类型：</span>
+        <div class="post__types">
+          <span v-for="(val,key) in categories" :data-type='key' :class="selectedCategory === key?'active':''" @click='selectType($event)'>{{val}}</span>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" @click="post($event)" :disabled="state === 'posting'">
-            {{ state === 'posting' ? '发布中...' : '发布'}}
-        </button>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="标题" v-model='title'>
+      </div>
+      <div class="form-group">
+        <label for="post" aria-hidden='true'></label>
+        <textarea name="post" id="post"></textarea>
       </div>
     </div>
-  </transition>
-
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" @click="post($event)" :disabled="state === 'posting'">
+            {{ state === 'posting' ? '发布中...' : '发布'}}
+        </button>
+    </div>
+  </div>
+</transition>
 </template>
 
 <script>
-import {ArticleCategory} from '../conf/config'
+import {
+  ArticleCategory
+} from '../conf/config'
 import createSimplemde from '../conf/createSimplemde'
 export default {
   data() {
-     return {
+    return {
       mde: null,
       categories: ArticleCategory,
       selectedCategory: 'ask',
@@ -55,14 +53,14 @@ export default {
       default: false
     },
 
-    article:{
+    article: {
       type: Object,
       default: null
     }
   },
 
   watch: {
-    show(newVal){
+    show(newVal) {
       if (newVal && !this.mde) {
         this.mde = createSimplemde({
           element: document.getElementById('post')
@@ -80,8 +78,8 @@ export default {
   },
 
   methods: {
-    close(){
-      this.$emit('close','post',()=>{
+    close() {
+      this.$emit('close', 'post', () => {
         this.state = 'ready';
         this.selectedCategory = '';
         this.title = '';
@@ -100,16 +98,16 @@ export default {
         });
       }
 
-      setTimeout(()=>{
+      setTimeout(() => {
         this.mde.value(article.content);
       });
     },
 
-    selectType(evt){
+    selectType(evt) {
       this.selectedCategory = evt.target.dataset.type;
     },
 
-    post(){
+    post() {
       if (this.state === 'posting') {
         return;
       }
@@ -126,7 +124,7 @@ export default {
         return;
       }
 
-      if(!content){
+      if (!content) {
         this.$message.error('内容不能为空');
         return;
       }
@@ -138,7 +136,7 @@ export default {
       };
 
       this.state = 'posting';
-      this.$emit('post',params);
+      this.$emit('post', params);
     }
   }
 }

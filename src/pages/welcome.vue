@@ -1,26 +1,28 @@
 <template>
-      <Door :state='doorState' @ready = 'ready'></Door>
+<Door :state='doorState' @ready='ready'></Door>
 </template>
 
 <script>
 import Door from '../components/FrontDoor'
 
-export default{
+export default {
 
-data() {
+  data() {
     return {
-        doorState: 'init'
+      doorState: 'init'
     }
-},
-components:{
+  },
+  components: {
     Door
-},
+  },
 
-methods:{
-    ready(){
-        this.doorState = 'start'
-        setTimeout(()=>{this.$router.push('/index')},3000)
+  methods: {
+    ready() {
+      this.doorState = 'start'
+      setTimeout(() => {
+        this.$router.push('/index')
+      }, 3000)
     }
-}
+  }
 }
 </script>

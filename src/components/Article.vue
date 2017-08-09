@@ -1,22 +1,20 @@
 <template>
-  <div class="article-container">
-    <article>
-      <h1 class="article__title">{{ article.title }}</h1>
-      <div class="article__meta-wrap clearfix">
-        <div class="article__btn-wrap">
-          <span v-show="editState" class="article__edit-btn" @click="edit">
+<div class="article-container">
+  <article>
+    <h1 class="article__title">{{ article.title }}</h1>
+    <div class="article__meta-wrap clearfix">
+      <div class="article__btn-wrap">
+        <span v-show="editState" class="article__edit-btn" @click="edit">
             <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
           </span>
-          <span v-show="collectState !== 0" class="article__like-btn"
-                @click="collect"></span>
-        </div>
+        <span v-show="collectState !== 0" class="article__like-btn" @click="collect"></span>
+      </div>
 
-        <div class="article__author-wrap">
-          <router-link :to="{ path: '/user/' + article.author.loginname }" class="article__author">
-            <img :src="article.author.avatar_url" class="avatar avatar--s">
-            {{ article.author.loginname }}
-          </router-link>
-          <span class="article__reply-time">
+      <div class="article__author-wrap">
+        <router-link :to="{ path: '/user/' + article.author.loginname }" class="article__author">
+          <img :src="article.author.avatar_url" class="avatar avatar--s"> {{ article.author.loginname }}
+        </router-link>
+        <span class="article__reply-time">
             {{ formatCreateTime(article.create_at) }}
           </span>
 
@@ -29,68 +27,68 @@
           </span>
         </div>
 
-        </div>
-
       </div>
-      <div class='article__content' v-html="article.content"></div>
-    </article>
-  </div>
+
+    </div>
+    <div class='article__content' v-html="article.content"></div>
+  </article>
+</div>
 </template>
 <script>
-  import Tools from '../conf/tools';
+import Tools from '../conf/tools';
 
-  export default {
-    data() {
-      return {
-        $likeBtn: null
-      };
+export default {
+  data() {
+    return {
+      $likeBtn: null
+    };
+  },
+
+  props: {
+    article: {
+      require: true
     },
 
-    props: {
-      article: {
-        require: true
-      },
-
-      collectState: { // 0(隐藏该功能) | 1(已收藏) | 2(没有收藏)
-        type: Number,
-        default: 0,
-        validator: val => val >= 0 && val <= 2
-      },
-
-      editState: {
-        type: Boolean,
-        default: false
-      }
+    collectState: { // 0(隐藏该功能) | 1(已收藏) | 2(没有收藏)
+      type: Number,
+      default: 0,
+      validator: val => val >= 0 && val <= 2
     },
 
-    watch: {
-      collectState(newVal) {
-        this.$likeBtn || (this.$likeBtn = this.$el.querySelector('.article__like-btn'));
+    editState: {
+      type: Boolean,
+      default: false
+    }
+  },
 
-        if (newVal === 1) {
-          this.$likeBtn.classList.add('is-active', 'animating');
-          this.$likeBtn.addEventListener('animationend', () => {
-            this.$likeBtn.classList.remove('animating');
-          }, false);
-        } else if (newVal === 2) {
-          this.$likeBtn.classList.remove('is-active');
-        }
-      }
-    },
+  watch: {
+    collectState(newVal) {
+      this.$likeBtn || (this.$likeBtn = this.$el.querySelector('.article__like-btn'));
 
-    methods: {
-      formatCreateTime(time) {
-        return Tools.timeFormatCN(time);
-      },
-
-      collect() {
-        this.$emit('collect');
-      },
-
-      edit() {
-        this.$emit('edit');
+      if (newVal === 1) {
+        this.$likeBtn.classList.add('is-active', 'animating');
+        this.$likeBtn.addEventListener('animationend', () => {
+          this.$likeBtn.classList.remove('animating');
+        }, false);
+      } else if (newVal === 2) {
+        this.$likeBtn.classList.remove('is-active');
       }
     }
-  };
+  },
+
+  methods: {
+    formatCreateTime(time) {
+      return Tools.timeFormatCN(time);
+    },
+
+    collect() {
+      this.$emit('collect');
+    },
+
+    edit() {
+      this.$emit('edit');
+    }
+  }
+};
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped></style>
